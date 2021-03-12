@@ -59,7 +59,7 @@ services:
 
   mail:
     container_name: mail
-    image: tozd/postfix
+    image: tozd/postfix:alpine-38
     restart: always
     env_file: .env
     expose:
