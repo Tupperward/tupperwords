@@ -59,7 +59,7 @@ services:
 
   mail:
     container_name: mail
-    image:tozd/postfix
+    image: tozd/postfix
     restart: always
     expose:
       - "25/tcp"
