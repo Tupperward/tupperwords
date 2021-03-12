@@ -13,6 +13,7 @@ services:
     command: '--default-authentication-plugin=mysql_native_password'
     networks:
       - app-network
+      - mail
 
   wordpress:
     depends_on:
@@ -30,6 +31,7 @@ services:
       - wordpress:/var/www/html
     networks:
       - app-network
+      - mail
 
   webserver:
     depends_on:
@@ -46,6 +48,7 @@ services:
       - certbot-etc:/etc/letsencrypt
     networks:
       - app-network
+      - mail
 
   certbot:
     depends_on:
