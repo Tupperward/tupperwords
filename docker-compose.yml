@@ -76,6 +76,7 @@ services:
     volumes:
       - /home/tupperward/wordpress/mail/volumes/spool:/var/spool/postfix
       - /home/tupperward/wordpress/mail/volumes/log:/var/log/postfix
+    command: sed -i '/imklog/s/^/#/' /etc/rsyslog.conf
     networks:
       mail:
 
