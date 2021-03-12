@@ -22,10 +22,10 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - WORDPRESS_DB_HOST=db:3306
-      - WORDPRESS_DB_USER=$MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DATABASE_HOST=db:3306
+      - WORDPRESS_DATABASE_USER=$MYSQL_USER
+      - WORDPRESS_DATABASE_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DATABASE_NAME=wordpress
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=$EMAIL
