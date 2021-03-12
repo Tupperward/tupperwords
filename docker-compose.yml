@@ -13,7 +13,6 @@ services:
     command: '--default-authentication-plugin=mysql_native_password'
     networks:
       - app-network
-      - mail
 
   wordpress:
     depends_on:
@@ -27,11 +26,15 @@ services:
       - WORDPRESS_DB_USER=$MYSQL_USER
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=$EMAIL
+      - SMTP_PASSWORD=$EMAIL_PASS
+      - SMTP_PROTOCOL=tls
     volumes:
       - wordpress:/var/www/html
     networks:
       - app-network
-      - mail
 
   webserver:
     depends_on:
@@ -48,7 +51,6 @@ services:
       - certbot-etc:/etc/letsencrypt
     networks:
       - app-network
-      - mail
 
   certbot:
     depends_on:
@@ -60,26 +62,6 @@ services:
       - wordpress:/var/www/html
     command: certonly --webroot --webroot-path=/var/www/html --email alexander.m.ward@gmail.com --agree-tos --no-eff-email --staging -d $HOSTNAME
 
-  mail:
-    container_name: mail
-    image: tozd/postfix:alpine-38
-    restart: always
-    env_file: .env
-    expose:
-      - "25/tcp"
-      - "465/tcp"
-      - "587/tcp"
-    environment:
-      - MAILNAME=$HOSTNAME
-      - MY_DESTINATION=localhost
-      - ROOT_ALIAS=$EMAIL
-    volumes:
-      - /home/tupperward/wordpress/mail/volumes/spool:/var/spool/postfix
-      - /home/tupperward/wordpress/mail/volumes/log:/var/log/postfix
-    command: sed -i '/imklog/s/^/#/' /etc/rsyslog.conf
-    networks:
-      mail:
-
 volumes:
   certbot-etc:
   wordpress:
@@ -88,5 +70,3 @@ volumes:
 networks:
   app-network:
     driver: bridge
-  mail:
-    name: mail
