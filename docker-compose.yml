@@ -55,18 +55,19 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email alexander.m.ward@gmail.com --agree-tos --no-eff-email --staging -d blog.tupperward.net
+    command: certonly --webroot --webroot-path=/var/www/html --email alexander.m.ward@gmail.com --agree-tos --no-eff-email --staging -d $HOSTNAME
 
   mail:
     container_name: mail
     image: tozd/postfix
     restart: always
+    env_file: .env
     expose:
       - "25/tcp"
       - "465/tcp"
       - "587/tcp"
     environment:
-      MAILNAME=blog.tupperward.net
+      MAILNAME=$HOSTNAME
       MY_DESTINATION=localhost
       ROOT_ALIAS=alexander.m.ward@gmail.com
     volumes:
