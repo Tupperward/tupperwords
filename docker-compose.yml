@@ -69,7 +69,7 @@ services:
     environment:
       MAILNAME=$HOSTNAME
       MY_DESTINATION=localhost
-      ROOT_ALIAS=alexander.m.ward@gmail.com
+      ROOT_ALIAS=$EMAIL
     volumes:
       - /home/tupperward/wordpress/mail/volumes/spool:/var/spool/postfix
       - /home/tupperward/wordpress/mail/volumes/log:/var/log/postfix
