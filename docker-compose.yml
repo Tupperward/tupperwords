@@ -67,7 +67,7 @@ services:
       - "587/tcp"
     environment:
       MAILNAME=blog.tupperward.net
-      MY_DESTINATION=localhost.localdomain, localhost
+      MY_DESTINATION=localhost
       ROOT_ALIAS=alexander.m.ward@gmail.com
     volumes:
       - /home/tupperward/wordpress/mail/volumes/spool:/var/spool/postfix
