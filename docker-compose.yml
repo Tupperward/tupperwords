@@ -17,15 +17,15 @@ services:
   wordpress:
     depends_on:
       - db
-    image: bitnami/wordpress
+    image: wordpress:5.1.1-fpm-alpine
     container_name: wordpress
     restart: unless-stopped
     env_file: .env
     environment:
-      - WORDPRESS_DATABASE_HOST=db:3306
-      - WORDPRESS_DATABASE_USER=$MYSQL_USER
-      - WORDPRESS_DATABASE_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DATABASE_NAME=wordpress
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=$EMAIL
